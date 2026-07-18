@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brecha digital en México — Historia de datos interactiva</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<!-- Librería Chart.js cargada desde un servidor alternativo más rápido -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   :root{
     --navy:#1B2A4A;
@@ -170,7 +171,7 @@
     <div class="stat"><b>+7.5 pts</b><span>Crecimiento nacional 2021→2024</span></div>
   </div>
 
-  <!-- GRÁFICO 1: BARRAS -->
+  <!-- GRÁFICO 1 -->
   <div class="card">
     <h2>Gráfico 1 — Hogares con acceso a internet por entidad federativa, 2023</h2>
     <div class="sub">Las tres entidades con mayor y menor cobertura, comparadas contra la media nacional</div>
@@ -183,7 +184,7 @@
     <div class="source">Fuente: INEGI, Encuesta Nacional sobre Disponibilidad y Uso de TIC en los Hogares (ENDUTIH), 2023.</div>
   </div>
 
-  <!-- GRÁFICO 2: LÍNEA -->
+  <!-- GRÁFICO 2 -->
   <div class="card">
     <h2>Gráfico 2 — Evolución de la población usuaria de internet en México</h2>
     <div class="sub">Selecciona el rango de años para explorar la tendencia nacional</div>
@@ -212,9 +213,10 @@
 </footer>
 
 <script>
+// Configurar la tipografía global para Chart.js
 Chart.defaults.font.family = "'Segoe UI', Calibri, Arial, sans-serif";
 
-// ---------- Gráfico 1: barras ----------
+// ---------- Inicialización del Gráfico 1: Barras ----------
 const estados = ["CDMX","Baja California","Quintana Roo","Guerrero","Oaxaca","Chiapas"];
 const valores = [89.5, 86.4, 83.6, 53.9, 53.0, 44.3];
 const colores = ["#1E7F7A","#1E7F7A","#1E7F7A","#C9A24B","#C9A24B","#C9A24B"];
@@ -279,7 +281,7 @@ new Chart(ctxBar, {
   }]
 });
 
-// ---------- Gráfico 2: línea ----------
+// ---------- Inicialización del Gráfico 2: Línea ----------
 const dataAll = { labels:['2021','2023','2024'], values:[75.6, 81.2, 83.1] };
 const dataRecent = { labels:['2023','2024'], values:[81.2, 83.1] };
 
@@ -323,7 +325,7 @@ let lineChart = new Chart(ctxLine, {
   }
 });
 
-// Controladores para la actualización dinámica del gráfico 2
+// Lógica para alternar el rango de años en el Gráfico 2
 document.querySelectorAll('#rangeToggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#rangeToggle button').forEach(b => b.classList.remove('active'));
