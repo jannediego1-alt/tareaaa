@@ -170,6 +170,7 @@
     <div class="stat"><b>+7.5 pts</b><span>Crecimiento nacional 2021→2024</span></div>
   </div>
 
+  <!-- GRÁFICO 1: BARRAS -->
   <div class="card">
     <h2>Gráfico 1 — Hogares con acceso a internet por entidad federativa, 2023</h2>
     <div class="sub">Las tres entidades con mayor y menor cobertura, comparadas contra la media nacional</div>
@@ -182,6 +183,7 @@
     <div class="source">Fuente: INEGI, Encuesta Nacional sobre Disponibilidad y Uso de TIC en los Hogares (ENDUTIH), 2023.</div>
   </div>
 
+  <!-- GRÁFICO 2: LÍNEA -->
   <div class="card">
     <h2>Gráfico 2 — Evolución de la población usuaria de internet en México</h2>
     <div class="sub">Selecciona el rango de años para explorar la tendencia nacional</div>
@@ -243,8 +245,7 @@ new Chart(ctxBar, {
         callbacks: {
           label: (ctx) => `${ctx.parsed.y}% de los hogares · ${ (ctx.parsed.y - MEDIA_NACIONAL >= 0 ? '+' : '') + (ctx.parsed.y - MEDIA_NACIONAL).toFixed(1) } pts vs. media nacional`
         }
-      },
-      annotation: undefined
+      }
     },
     scales: {
       y: {
@@ -322,10 +323,12 @@ let lineChart = new Chart(ctxLine, {
   }
 });
 
-document.querySelectorAll('#rangeToggle button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#rangeToggle button').forEach(b=>b.classList.remove('active'));
+// Controladores para la actualización dinámica del gráfico 2
+document.querySelectorAll('#rangeToggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#rangeToggle button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    
     const d = btn.dataset.range === 'all' ? dataAll : dataRecent;
     lineChart.data.labels = d.labels;
     lineChart.data.datasets[0].data = d.values;
